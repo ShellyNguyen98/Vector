@@ -113,6 +113,17 @@ CWID = cw;
 template<typename T>class AppointmentSystem{
 public:
 // Write Your code
+std::vector<Appointment<T>> appointments;
+
+void schedule(const Appointment<T>& newAppointments){
+    for (const Appointment<T>& appointment : appointments) {
+        if (appointment.CWID == newAppointments.CWID) {
+            std::cout << "You have already schedule an appointment!!!" << std::endl;
+            return;
+        }
+    }
+    appointments.push_back(newAppointments);
+};
 void display(){
 std::cout<<"-------Appointments-------"<<std::endl;
 std::cout<<std::left<<std::setw(20)<<"Name"<<std::setw(15)<<"Date"<<std::setw(15)<<
