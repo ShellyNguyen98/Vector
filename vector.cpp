@@ -55,6 +55,35 @@ void updateItem(T itemName, T newExpiration int newQuantity, T newCategory) {
  }
     throw "Item not found";
 }
+
+void removeItem(T itemName) {
+    for (auto it = item.begin(); it != items.end(); ++it) {
+        if (it->name = itemName) {
+            items.erase(it);
+            std::cout << "Item removed: " << itemName << std::endl;
+            return;
+        }
+    }
+    throw "Item not found";
+};
+
+int Total() {
+    int totalItems = 0;
+    for (size_t i = 0; i < items.size(); ++i ) {
+        totalItems += items[i]. quantity;
+    }
+    return totalItems
+};
+
+void searchItem(T itemName) {
+    for (const item<T>& item : items) {
+        if (item.name == itemName) {
+            return;
+        }
+    }
+    throw "Item not found!";
+}
+
 void displayItems(){
 std::cout<<"-------Inventory-------"<<std::endl;
 std::cout<<std::left<<std::setw(20)<<"Name"<<std::setw(15)<<"Expiration"<<std::setw
