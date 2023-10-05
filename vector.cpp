@@ -124,6 +124,24 @@ void schedule(const Appointment<T>& newAppointments){
     }
     appointments.push_back(newAppointments);
 };
+
+int Total_appointments(T date, T time) {
+    int totalAppointments = 0;
+    for (const Appointment<T>& appointment : appointments) {
+        if (appointment.ap_date == date && appointment.ap_time == time) {
+            totalAppointments++;
+        }
+    }
+    return totalAppointments;
+};
+
+void removeRecent() {
+    if (!appoints.empty()) {
+        appointments.pop_back();
+    } else {
+        std::cout << "No appointments to remove" << std::endl;
+    }
+};
 void display(){
 std::cout<<"-------Appointments-------"<<std::endl;
 std::cout<<std::left<<std::setw(20)<<"Name"<<std::setw(15)<<"Date"<<std::setw(15)<<
@@ -136,7 +154,6 @@ time<<std::setw(15)<<ap[i].CWID<<std::endl;
 }
 };
 int main(){
-/* Remove comments and run following test cases
 Inventory<std::string> i1;
 Item<std::string> I1("Protien Bar","05/09/2023","Snacks",4);
 i1.addNewItem(I1);
