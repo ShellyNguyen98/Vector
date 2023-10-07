@@ -43,7 +43,7 @@ void increaseQuantity(T itemName, int addQuantity) {
     std::cout << "Item not found in inventory. " << std::endl; 
 };
 
-void updateItem(T itemName, T newExpiration int newQuantity, T newCategory) {
+void updateItem(T itemName, T newExpiration, int newQuantity, T newCategory) {
  for (Item<T>& item : items) {
     if (item.name == itemName) {
         item.expiration = newExpiration;
@@ -57,7 +57,7 @@ void updateItem(T itemName, T newExpiration int newQuantity, T newCategory) {
 }
 
 void removeItem(T itemName) {
-    for (auto it = item.begin(); it != items.end(); ++it) {
+    for (auto it = items.begin(); it != items.end(); ++it) {
         if (it->name = itemName) {
             items.erase(it);
             std::cout << "Item removed: " << itemName << std::endl;
@@ -72,15 +72,15 @@ int Total() {
     for (size_t i = 0; i < items.size(); ++i ) {
         totalItems += items[i]. quantity;
     }
-    return totalItems
+    return totalItems;
 };
 
 void searchItem(T itemName) {
-    for (const item<T>& item : items) {
+    for (const Item<T>& item : items) {
         if (item.name == itemName) {
-            return;
+            return item;
         }
-    }
+    };
     throw "Item not found!";
 }
 
