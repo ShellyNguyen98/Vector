@@ -29,8 +29,12 @@ void addNewItem(T name, T expiration, T category, int quantity){
         return; 
     }
    } 
-   items.emplace_back(name, expiration, category, quantity);
+   items.push_back(name, expiration, category, quantity);
 };
+
+void addNewItem(const Item<T>& newItem) {
+        items.push_back(newItem);
+    }
 
 void increaseQuantity(T itemName, int addQuantity) {
     for (Item<T>& item : items) { //iterate through the list of items
@@ -43,22 +47,34 @@ void increaseQuantity(T itemName, int addQuantity) {
     std::cout << "Item not found in inventory. " << std::endl; 
 };
 
-void updateItem(T itemName, T newExpiration, int newQuantity, T newCategory) {
- for (Item<T>& item : items) {
-    if (item.name == itemName) {
-        item.expiration = newExpiration;
-        item.quantity = newQuantity;
-        item.category = newCategory;
-        std::cout << "Item updated: " << itemName << std::endl;
-        return;
-    }
- }
-    throw "Item not found";
-}
+// void updateItem(T itemName,T newExpiration, int newQuantity, T newCategory) {
+//  for (Item<T>& item : items) {
+//     if (item.name == itemName) {
+//         item.expiration = newExpiration;
+//         item.quantity = newQuantity;
+//         item.category = newCategory;
+//         std::cout << "Item updated: " << itemName << std::endl;
+//         return;
+//     }
+//  }
+//     throw "Item not found";
+// }
+void updateItem(T itemName, T expiration, T category, int quantityInput) {
+
+    for(size_t i = 0; i < items.size(); i++){
+        if (items[i].name == itemName) {
+           items[i].expiration = expiration;
+           items[i].category = category;
+           items[i].quantity = quantityInput;
+           return;
+         }
+     }
+        throw ("Item not found");
+  }
 
 void removeItem(T itemName) {
     for (auto it = items.begin(); it != items.end(); ++it) {
-        if (it->name = itemName) {
+        if (it->name == itemName) {
             items.erase(it);
             std::cout << "Item removed: " << itemName << std::endl;
             return;
@@ -75,7 +91,7 @@ int Total() {
     return totalItems;
 };
 
-void searchItem(T itemName) {
+Item<T> searchItem(T itemName) {
     for (const Item<T>& item : items) {
         if (item.name == itemName) {
             return item;
@@ -90,9 +106,7 @@ std::cout<<std::left<<std::setw(20)<<"Name"<<std::setw(15)<<"Expiration"<<std::s
 (15)<<"Quantity"<<std::setw(10)<<"Category"<<std::endl;
 for(int i=0; i<items.size();i++){
 std::cout<<std::left <<
-std::setw(20)<<items[i].name<<std::setw(15)<<items[i].expiration<<std::setw(15)<<it
-ems[i].quantity<<std::setw(15)<<items[i].category<<std::endl;
-}
+std::setw(20)<<items[i].name<<std::setw(15)<<items[i].expiration<<std::setw(15)<<items[i].quantity<<std::setw(15)<<items[i].category<<std::endl;}
 }
 };
 
@@ -113,21 +127,21 @@ CWID = cw;
 template<typename T>class AppointmentSystem{
 public:
 // Write Your code
-std::vector<Appointment<T>> appointments;
+std::vector<Appointment<T>> ap;
 
 void schedule(const Appointment<T>& newAppointments){
-    for (const Appointment<T>& appointment : appointments) {
+    for (const Appointment<T>& appointment : ap) {
         if (appointment.CWID == newAppointments.CWID) {
             std::cout << "You have already schedule an appointment!!!" << std::endl;
             return;
         }
     }
-    appointments.push_back(newAppointments);
+    ap.push_back(newAppointments);
 };
 
 int Total_appointments(T date, T time) {
     int totalAppointments = 0;
-    for (const Appointment<T>& appointment : appointments) {
+    for (const Appointment<T>& appointment : ap) {
         if (appointment.ap_date == date && appointment.ap_time == time) {
             totalAppointments++;
         }
@@ -136,8 +150,8 @@ int Total_appointments(T date, T time) {
 };
 
 void removeRecent() {
-    if (!appoints.empty()) {
-        appointments.pop_back();
+    if (!ap.empty()) {
+        ap.pop_back();
     } else {
         std::cout << "No appointments to remove" << std::endl;
     }
@@ -148,8 +162,7 @@ std::cout<<std::left<<std::setw(20)<<"Name"<<std::setw(15)<<"Date"<<std::setw(15
 "Time"<<std::setw(15)<<"CWID"<<std::endl;
 for(int i=0; i<ap.size();i++){
 std::cout<<std::left <<
-std::setw(20)<<ap[i].c_name<<std::setw(15)<<ap[i].ap_date<<std::setw(15)<<ap[i].ap_
-time<<std::setw(15)<<ap[i].CWID<<std::endl;
+std::setw(20)<<ap[i].c_name<<std::setw(15)<<ap[i].ap_date<<std::setw(15)<<ap[i].ap_time<<std::setw(15)<<ap[i].CWID<<std::endl;
 }
 }
 };
@@ -209,5 +222,5 @@ s1.Total_appointments("09/12/2023","12:00PM");
 Appointment<std::string> a5("Chris Lynn","09/12/2023","12:00PM","879455714");
 s1.schedule(a4);
 s1.removeRecent();
-s1.display();*/
+s1.display();
 }
